@@ -4,7 +4,7 @@ import { StaticRouter, Route, matchPath } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
 
-export const render = (req, store, Routes) => {
+export const render = (req, store, Routes, context) => {
 
     // 难道异步数据，并填充到store之中
     // store里填充什么，需要结合当前用户请求地址和路由来判断
@@ -13,7 +13,7 @@ export const render = (req, store, Routes) => {
 
     const content = renderToString((
         <Provider store={store}>
-            <StaticRouter location={req.path} context={{}}>
+            <StaticRouter location={req.path} context={context}>
                 <Fragment>
                     {/* {Routes.map(routes => {
                         return <Route {...routes}></Route>

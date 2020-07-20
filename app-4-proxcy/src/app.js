@@ -4,7 +4,6 @@ import { renderRoutes } from 'react-router-config'
 import { actions } from './store/header'
 import { connect } from 'react-redux'
 const App = (props) => {
-    console.log(props.login, 'isLogin')
     return (<div>
         <Header />
         {renderRoutes(props.route.routes)}

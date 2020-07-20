@@ -24,7 +24,6 @@ class Home extends Component {
     }
 }
 Home.loadData = (store) => {
-    console.log('in ssr')
     return store.dispatch(getHomeListAction(true))
     //负责在服务器渲染之前，把这个路由需要的数据提前加载
 }

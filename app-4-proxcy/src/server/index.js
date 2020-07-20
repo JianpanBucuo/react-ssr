@@ -16,7 +16,7 @@ app.use('/api', proxy('http://47.95.113.63', {
     }
 }));
 app.get('*', (req, res) => {
-    const store = getStore()
+    const store = getStore(req)
     // const matchedRoutes = []
     // Routes.some(route => {
     //     const match = matchPath(req.path, route)
@@ -28,7 +28,6 @@ app.get('*', (req, res) => {
     const promise = []
     matchedRoutes.forEach(v => {
         // 多级路由服务端渲染
-        console.log(v)
         if (v.route.loadData) {
 
             promise.push(v.route.loadData(store))
@@ -41,10 +40,22 @@ app.get('*', (req, res) => {
 
     })
     Promise.all(promise).then(() => {
-        res.send(render(req, store, Routes))
+        const context = { a: 1 }
+        const html = render(req, store, Routes, context)
+        console.log(context)
+        if (context.notFound == true) {
+            res.status(404)
+        }
+        if (context.action === 'REPLACE') {
+            res.redirect(301, context.url)
+            return
+        }
+        res.send(html)
+    }).catch(() => {
+        res.send('')
     })
 })
-app.listen(3000, '192.168.1.6', () => {
+app.listen(3000, '192.168.1.7', () => {
     console.log('启动服务')
 })
 // http://47.95.113.63/ssr/api/isLogin.json?secret=PP87ANTIPIRATE

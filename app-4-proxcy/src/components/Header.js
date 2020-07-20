@@ -1,22 +1,28 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-const Header = (props) => {
-    return (
-        <Fragment>
-            <Link to='/'>首页</Link>
-            <br />
-            {
+import { loginEvent, logOutEvent } from '../store/header/actions'
+class Header extends Component {
 
-                props.login ?
-                    <Fragment>
-                        <Link to='/login'>翻译列表</Link>
-                        <Link to='/login'>退出</Link>
-                    </Fragment>
-                    : <Link to='/login'>登录</Link>
-            }
-        </Fragment>
-    )
+    render () {
+        const { handleLogin, handleLogOut } = this.props
+        return (
+            <Fragment>
+                <Link to='/'>首页</Link>
+                <br />
+                {
+
+                    this.props.login ?
+                        <Fragment>
+                            <Link to='/translation'>翻译列表</Link>
+                            <div onClick={handleLogOut}>退出</div>
+                        </Fragment>
+                        : <div onClick={handleLogin}>登录</div>
+                }
+            </Fragment >
+        )
+    }
+
 }
 const mapStateToProps = (state) => {
     return {
@@ -24,6 +30,13 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = (dispatch) => {
-
+    return {
+        handleLogin () {
+            dispatch(loginEvent())
+        },
+        handleLogOut () {
+            dispatch(logOutEvent())
+        }
+    }
 }
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

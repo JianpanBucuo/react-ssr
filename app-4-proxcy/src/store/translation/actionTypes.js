@@ -1,0 +1,1 @@
+export const getTranslationListType = 'GET_TRANSLATION_TYPE'

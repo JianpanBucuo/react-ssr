@@ -1,13 +1,10 @@
 import * as constant from './actionTypes'
 const defaultState = {
-    login: false
+    translationList: []
 }
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case constant.changeLoginType: return {
-            ...state, login: action.value
-        }
-
+        case constant.getTranslationListType: return Object.assign({}, state, { translationList: action.translationList })
         default: return state
     }
 }
