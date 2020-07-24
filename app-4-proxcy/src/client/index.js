@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import ReactDom from 'react-dom'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import Routes from '../Routes'
 import { Provider } from 'react-redux'
-import getStore, { getClientStore } from '../store'
+import { getClientStore } from '../store'
 import { renderRoutes } from 'react-router-config'
 const App = () => {
     return (
@@ -15,7 +15,6 @@ const App = () => {
                     })} */}
                     {renderRoutes(Routes)}
                 </Fragment>
-
             </BrowserRouter>
         </Provider>
     )

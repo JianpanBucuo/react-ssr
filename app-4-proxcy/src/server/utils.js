@@ -10,7 +10,6 @@ export const render = (req, store, Routes, context) => {
     // store里填充什么，需要结合当前用户请求地址和路由来判断
     // 根据路由路径，往store里加数据
 
-
     const content = renderToString((
         <Provider store={store}>
             <StaticRouter location={req.path} context={context}>

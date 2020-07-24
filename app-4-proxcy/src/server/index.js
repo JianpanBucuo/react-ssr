@@ -17,13 +17,6 @@ app.use('/api', proxy('http://47.95.113.63', {
 }));
 app.get('*', (req, res) => {
     const store = getStore(req)
-    // const matchedRoutes = []
-    // Routes.some(route => {
-    //     const match = matchPath(req.path, route)
-    //     if (match) {
-    //         matchedRoutes.push(route)
-    //     }
-    // })
     const matchedRoutes = matchRoutes(Routes, req.path)
     const promise = []
     matchedRoutes.forEach(v => {
